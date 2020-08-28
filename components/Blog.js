@@ -3,12 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
+import TAGS_QUERY from '../apollo/queries/tag/tags'
 import Header from './Header';
+import Query from './query'
 import MainFeaturedPost from './MainFeaturedPost';
-import FeaturedPost from './FeaturedPost';
 import Main from './Main';
 import Footer from './Footer';
 
@@ -17,19 +15,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
 }));
-
-const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
-];
 
 const mainFeaturedPost = {
   title: 'Title of a longer featured blog post',
@@ -68,14 +53,11 @@ export default function Blog() {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" sections={sections} />
+      <Query query={TAGS_QUERY} id={null}>
+        {({ data: { tags } }) => <Header title="Blog" sections={tags} />}
+      </Query>
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
-          <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
-            ))}
-          </Grid>
           <Grid container spacing={5} className={classes.mainGrid}>
             <Main title="Blog posts" posts={posts} />
           </Grid>

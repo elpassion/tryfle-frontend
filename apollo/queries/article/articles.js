@@ -5,7 +5,12 @@ const LAST_ARTICLES_QUERY = gql`
     articles(limit: 10, sort: "created_at:desc") {
      id
      title
+     slug
      intro_text
+     cover_photo {
+      formats
+      url
+    }
    }
  }
 `;

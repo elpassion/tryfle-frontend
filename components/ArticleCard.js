@@ -25,11 +25,11 @@ const useStyles = makeStyles({
 
 export default function ArticleCard({ article }) {
   const classes = useStyles();
-  console.log({article});
+  console.log({ article });
 
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea component="a" href={`posts/${article.id}`}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
