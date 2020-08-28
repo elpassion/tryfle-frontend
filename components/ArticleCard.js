@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link';
 import PropTypes from "prop-types";
 import {
   makeStyles,
@@ -28,32 +29,34 @@ export default function ArticleCard({ article }) {
 
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href={`posts/${article.id}`}>
-        <Card className={classes.card}>
-          <div className={classes.cardDetails}>
-            <CardContent>
-              <Typography component="h2" variant="h5">
-                {article.title}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {article.created_at}
-              </Typography>
-              <Typography variant="subtitle1" paragraph>
-                {article.info_text}
-              </Typography>
-              <Typography variant="subtitle1" color="primary">
-                Continue reading...
-              </Typography>
-            </CardContent>
-          </div>
-          <Hidden xsDown>
-            <CardMedia
-              className={classes.cardMedia}
-              image={'http://localhost:1337' + article.cover_photo.url}
-            />
-          </Hidden>
-        </Card>
-      </CardActionArea>
+      <Card className={classes.card}>
+        <div className={classes.cardDetails}>
+          <CardContent>
+            <Typography component="h2" variant="h5">
+              {article.title}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              {article.created_at}
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {article.info_text}
+            </Typography>
+            <Link href="/posts/[post_id]" as={`/posts/${article.id}`}>
+              <a>
+                <Typography variant="subtitle1" color="primary">
+                  Continue reading...
+                </Typography>
+              </a>
+            </Link>
+          </CardContent>
+        </div>
+        <Hidden xsDown>
+          <CardMedia
+            className={classes.cardMedia}
+            image={'http://localhost:1337' + article.cover_photo.url}
+          />
+        </Hidden>
+      </Card>
     </Grid>
   );
 }
