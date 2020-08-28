@@ -25,7 +25,6 @@ const useStyles = makeStyles({
 
 export default function ArticleCard({ article }) {
   const classes = useStyles();
-  console.log({ article });
 
   return (
     <Grid item xs={12} md={6}>
