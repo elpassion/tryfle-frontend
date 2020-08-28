@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Query from "./query";
-import ARTICLES_QUERY from "../apollo/queries/article/articles";
+import LAST_ARTICLES_QUERY from "../apollo/queries/article/articles";
 import Markdown from './Markdown';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +25,7 @@ export default function Main(props) {
         {title}
       </Typography>
       <Divider />
-      <Query query={ARTICLES_QUERY} id={null}>
+      <Query query={LAST_ARTICLES_QUERY} id={null}>
         {({ data: { articles } }) =>
           articles.map(({ title, slug, intro_text }) =>
             <article>
