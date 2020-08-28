@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Query from "./query";
 import ARTICLES_QUERY from "../../apollo/queries/article/articles";
+import Markdown from './Markdown';
 
 const useStyles = makeStyles((theme) => ({
   markdown: {
@@ -16,21 +17,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main(props) {
   const classes = useStyles();
-  const { posts, title } = props;
+  const { title } = props;
 
   return (
-    <Grid item xs={12} md={8}>
+    <Grid item xs={12} md={12}>
       <Typography variant="h6" gutterBottom>
         {title}
       </Typography>
       <Divider />
       <Query query={ARTICLES_QUERY} id={null}>
-        {({ data: { articles } }) => {
-       return articles.map(article => (
-        article.title
-      ))}
-       }
-       </Query>
+        {({ data: { articles } }) =>
+          articles.map(({ title, slug }) =>
+            <Markdown className={classes.markdown} key={slug}>
+              {title}
+            </Markdown>
+          )}
+      </Query>
     </Grid>
   );
 }
